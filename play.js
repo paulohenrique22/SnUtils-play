@@ -1,125 +1,326 @@
-! function () {
-    var e = {
-        "escreve-e-apaga": {
-            url: "https://www.myinstants.com/media/sounds/escreve-e-apaga.mp3",
-            description: "Escreve e Apaga"
-        },
-        "hehe-boi": {
-            url: "https://www.myinstants.com/media/sounds/hehe-boi-sound-effect.mp3",
-            description: "Hehe boi"
-        },
-        "tira": {
-            url: "https://www.myinstants.com/media/sounds/para-tira.mp3",
-            description: "Tira"
-        },
-        "paje": {
-            url: "https://www.myinstants.com/media/sounds/ai-paje.mp3",
-            description: "Paj\xe9"
-        },
-        "ryu": {
-            url: "https://www.myinstants.com/media/sounds/da_hadouken_ryu_3.mp3",
-            description: "Ryu Ken"
-        },
-        "metralhadora": {
-            url: "https://www.myinstants.com/media/sounds/pastor-metralhadora.mp3",
-            description: "Pastor Metralhadora"
-        },
-        "cumano": {
-            url: "https://www.myinstants.com/media/sounds/vai-da-o-cu-mano_5E69M5L.mp3",
-            description: "Cumano"
-        },
-        "leno": {
-            url: "https://www.myinstants.com/media/sounds/leno0-bregaaa.mp3",
-            description: "Leno"
-        },
-        "leno2": {
-            url: "https://www.myinstants.com/media/sounds/leno-brega.mp3",
-            description: "Leno"
-        },
-        "balada": {
-            url: "https://www.myinstants.com/media/sounds/tiririca-bom-negocio-vamo-pra-balada.mp3",
-            description: "Balada"
-        },
-    },
-        t = "$0".trim().toLowerCase(),
-        a = "function" == typeof snuGetDocument ? snuGetDocument() : document;
 
-    function n(t) {
-        var n = e[t];
-        if (n) {
-            var o = "snu-custom-audio-player",
-                p = a.getElementById(o);
-            p || ((p = a.createElement("audio")).id = o, p.preload = "auto", a.body.appendChild(p)), p.pause(), p.currentTime = 0, p.src = n.url, p.load();
-            var i = p.play();
-            i && "function" == typeof i.catch && i.catch(function (e) {
-                console.error("Erro ao reproduzir \xe1udio:", e), "function" == typeof snuShowAlert && snuShowAlert("N\xe3o foi poss\xedvel reproduzir o \xe1udio.", "warning")
-            })
-        }
-    }
-    if ("list" === t) {
-        ! function t() {
-            var o = "snu-play-audio-modal",
-                p = "snu-play-audio-modal-style",
-                i = a.getElementById(o);
-            if (i && i.parentNode.removeChild(i), !a.getElementById(p)) {
-                var r = a.createElement("style");
-                r.id = p, r.textContent = "#" + o + " {position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.65);font-family:Arial,sans-serif;box-sizing:border-box;}#" + o + " * {box-sizing:border-box;}#" + o + " .play-modal {width:100%;max-width:720px;max-height:85vh;overflow:auto;background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);color:#1f2937;}#" + o + " .play-header {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;border-bottom:1px solid #e5e7eb;}#" + o + " .play-title {margin:0;font-size:20px;font-weight:700;}#" + o + " .play-subtitle {margin:6px 0 0;font-size:13px;color:#6b7280;}#" + o + " .play-close {border:0;background:transparent;color:#6b7280;font-size:28px;cursor:pointer;line-height:1;padding:0 4px;}#" + o + " .play-content {padding:20px 24px;}#" + o + " table {width:100%;border-collapse:collapse;font-size:14px;}#" + o + " th {background:#f8fafc;color:#64748b;font-weight:600;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.04em;}#" + o + " th,#" + o + " td {padding:13px 12px;border-bottom:1px solid #e5e7eb;vertical-align:middle;}#" + o + " tbody tr:hover {background:#f8fafc;}#" + o + " .play-command {font-family:monospace;font-size:13px;color:#5e4e9b;font-weight:600;white-space:nowrap;}#" + o + " .play-button {border:0;border-radius:6px;padding:8px 12px;background:#5e4e9b;color:#fff;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}#" + o + " .play-button:hover {background:#493a80;}#" + o + " .play-footer {padding:14px 24px;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#6b7280;font-size:12px;}@media(max-width:520px) {#" + o + " {padding:10px;}#" + o + " .play-header,#" + o + " .play-content {padding:16px;}#" + o + " th,#" + o + " td {padding:10px 6px;}#" + o + " .play-command {white-space:normal;overflow-wrap:anywhere;}#" + o + " .play-footer {padding:12px 16px;}}", a.head.appendChild(r)
+(function (global) {
+    "use strict";
+
+    function SNAudio() {
+        this.audioId = "snu-custom-audio-player";
+        this.modalId = "snu-play-audio-modal";
+        this.styleId = "snu-play-audio-modal-style";
+
+        this.commands = {
+            "escreve-e-apaga": {
+                url: "https://www.myinstants.com/media/sounds/escreve-e-apaga.mp3",
+                description: "Escreve e Apaga"
+            },
+            "hehe-boi": {
+                url: "https://www.myinstants.com/media/sounds/hehe-boi-sound-effect.mp3",
+                description: "Hehe boi"
+            },
+            "tira": {
+                url: "https://www.myinstants.com/media/sounds/para-tira.mp3",
+                description: "Tira"
+            },
+            "paje": {
+                url: "https://www.myinstants.com/media/sounds/ai-paje.mp3",
+                description: "Pajé"
+            },
+            "ryu": {
+                url: "https://www.myinstants.com/media/sounds/da_hadouken_ryu_3.mp3",
+                description: "Ryu Ken"
+            },
+            "metralhadora": {
+                url: "https://www.myinstants.com/media/sounds/pastor-metralhadora.mp3",
+                description: "Pastor Metralhadora"
+            },
+            "cumano": {
+                url: "https://www.myinstants.com/media/sounds/vai-da-o-cu-mano_5E69M5L.mp3",
+                description: "Cumano"
+            },
+            "leno": {
+                url: "https://www.myinstants.com/media/sounds/leno0-bregaaa.mp3",
+                description: "Leno"
+            },
+            "leno2": {
+                url: "https://www.myinstants.com/media/sounds/leno-brega.mp3",
+                description: "Leno"
+            },
+            "balada": {
+                url: "https://www.myinstants.com/media/sounds/tiririca-bom-negocio-vamo-pra-balada.mp3",
+                description: "Balada"
             }
-            var d = a.createElement("div");
-            d.id = o;
-            var l = a.createElement("div");
-            l.className = "play-modal";
-            var s = a.createElement("div");
-            s.className = "play-header";
-            var c = a.createElement("div"),
-                m = a.createElement("h2");
-            m.className = "play-title", m.textContent = "Biblioteca de \xe1udios";
-            var u = a.createElement("p");
-            u.className = "play-subtitle", u.textContent = "Consulte os comandos dispon\xedveis e reproduza um \xe1udio.", c.appendChild(m), c.appendChild(u);
-            var h = a.createElement("button");
-            h.className = "play-close", h.type = "button", h.textContent = "\xd7", h.title = "Fechar", h.setAttribute("aria-label", "Fechar modal"), h.onclick = function () {
-                d.parentNode && d.parentNode.removeChild(d)
-            }, s.appendChild(c), s.appendChild(h);
-            var f = a.createElement("div");
-            f.className = "play-content";
-            var x = a.createElement("table"),
-                b = a.createElement("thead"),
-                y = a.createElement("tr");
-            ["Comando", "Descri\xe7\xe3o", "A\xe7\xe3o"].forEach(function (e) {
-                var t = a.createElement("th");
-                t.textContent = e, y.appendChild(t)
-            }), b.appendChild(y), x.appendChild(b);
-            var g = a.createElement("tbody"),
-                v = Object.keys(e);
-            v.forEach(function (t) {
-                var o = e[t],
-                    p = a.createElement("tr"),
-                    i = a.createElement("td"),
-                    r = a.createElement("span");
-                r.className = "play-command", r.textContent = "/play " + t, i.appendChild(r);
-                var d = a.createElement("td");
-                d.textContent = o.description;
-                var l, s = a.createElement("td"),
-                    c = a.createElement("button");
-                c.type = "button", c.className = "play-button", c.textContent = "▶ Reproduzir", c.onclick = (l = t, function () {
-                    n(l)
-                }), s.appendChild(c), p.appendChild(i), p.appendChild(d), p.appendChild(s), g.appendChild(p)
-            }), x.appendChild(g), f.appendChild(x);
-            var C = a.createElement("div");
-            C.className = "play-footer";
-            var $ = a.createElement("span");
-            $.textContent = v.length + " \xe1udio(s) dispon\xedvel(is)";
-            var w = a.createElement("span");
-            w.textContent = "ESC n\xe3o fecha o modal; use \xd7 ou clique fora.", C.appendChild($), C.appendChild(w), l.appendChild(s), l.appendChild(f), l.appendChild(C), d.appendChild(l), d.onclick = function (e) {
-                e.target === d && d.parentNode && d.parentNode.removeChild(d)
-            }, a.body.appendChild(d)
-        }();
-        return
+        };
     }
-    if (e[t]) {
-        n(t);
-        return
-    }
-    var o = "Comando n\xe3o encontrado: " + (t || "(vazio)") + "\n\nUse /play list para consultar os comandos dispon\xedveis.";
-    "function" == typeof snuShowAlert ? snuShowAlert(o, "warning") : alert(o)
-}();
+
+    SNAudio.prototype.getDocument = function () {
+        return typeof snuGetDocument === "function"
+            ? snuGetDocument()
+            : document;
+    };
+
+    SNAudio.prototype.notify = function (message, type) {
+        if (typeof snuShowAlert === "function") {
+            snuShowAlert(message, type || "info");
+        } else {
+            alert(message);
+        }
+    };
+
+    SNAudio.prototype.play = function (name) {
+        name = (name || "").trim().toLowerCase();
+
+        var selected = this.commands[name];
+
+        if (!selected) {
+            this.notify(
+                "Comando não encontrado: " + (name || "(vazio)") +
+                "\n\nUse /play list para consultar os comandos disponíveis.",
+                "warning"
+            );
+            return;
+        }
+
+        var doc = this.getDocument();
+        var audio = doc.getElementById(this.audioId);
+
+        if (!audio) {
+            audio = doc.createElement("audio");
+            audio.id = this.audioId;
+            audio.preload = "auto";
+            doc.body.appendChild(audio);
+        }
+
+        audio.pause();
+        audio.currentTime = 0;
+        audio.src = selected.url;
+        audio.load();
+
+        var playback = audio.play();
+
+        if (playback && typeof playback.catch === "function") {
+            playback.catch(function (error) {
+                console.error("Erro ao reproduzir áudio:", error);
+                this.notify(
+                    "Não foi possível reproduzir o áudio.",
+                    "warning"
+                );
+            }.bind(this));
+        }
+    };
+
+    SNAudio.prototype.list = function () {
+        var doc = this.getDocument();
+        var self = this;
+        var oldModal = doc.getElementById(this.modalId);
+
+        if (oldModal && oldModal.parentNode) {
+            oldModal.parentNode.removeChild(oldModal);
+        }
+
+        this.addStyles(doc);
+
+        var overlay = doc.createElement("div");
+        overlay.id = this.modalId;
+
+        var modal = doc.createElement("div");
+        modal.className = "play-modal";
+
+        var header = doc.createElement("div");
+        header.className = "play-header";
+
+        var titleContainer = doc.createElement("div");
+
+        var title = doc.createElement("h2");
+        title.className = "play-title";
+        title.textContent = "Biblioteca de áudios";
+
+        var subtitle = doc.createElement("p");
+        subtitle.className = "play-subtitle";
+        subtitle.textContent =
+            "Consulte os comandos disponíveis e reproduza um áudio.";
+
+        titleContainer.appendChild(title);
+        titleContainer.appendChild(subtitle);
+
+        var close = doc.createElement("button");
+        close.className = "play-close";
+        close.type = "button";
+        close.textContent = "\u00D7";
+        close.title = "Fechar";
+
+        close.onclick = function () {
+            self.close();
+        };
+
+        header.appendChild(titleContainer);
+        header.appendChild(close);
+
+        var content = doc.createElement("div");
+        content.className = "play-content";
+
+        var table = doc.createElement("table");
+        var thead = doc.createElement("thead");
+        var headerRow = doc.createElement("tr");
+
+        ["Comando", "Descrição", "Ação"].forEach(function (label) {
+            var th = doc.createElement("th");
+            th.textContent = label;
+            headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        var tbody = doc.createElement("tbody");
+        var names = Object.keys(this.commands);
+
+        names.forEach(function (name) {
+            var item = self.commands[name];
+            var row = doc.createElement("tr");
+
+            var commandCell = doc.createElement("td");
+            var command = doc.createElement("span");
+            command.className = "play-command";
+            command.textContent = "/play " + name;
+            commandCell.appendChild(command);
+
+            var descriptionCell = doc.createElement("td");
+            descriptionCell.textContent = item.description;
+
+            var actionCell = doc.createElement("td");
+            var button = doc.createElement("button");
+            button.type = "button";
+            button.className = "play-button";
+            button.textContent = "\u25B6 Reproduzir";
+
+            button.onclick = function () {
+                self.play(name);
+            };
+
+            actionCell.appendChild(button);
+            row.appendChild(commandCell);
+            row.appendChild(descriptionCell);
+            row.appendChild(actionCell);
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        content.appendChild(table);
+
+        var footer = doc.createElement("div");
+        footer.className = "play-footer";
+
+        var count = doc.createElement("span");
+        count.textContent = names.length + " áudio(s) disponível(is)";
+
+        var tip = doc.createElement("span");
+        tip.textContent = "Clique fora ou em × para fechar.";
+
+        footer.appendChild(count);
+        footer.appendChild(tip);
+
+        modal.appendChild(header);
+        modal.appendChild(content);
+        modal.appendChild(footer);
+        overlay.appendChild(modal);
+
+        overlay.onclick = function (event) {
+            if (event.target === overlay) {
+                self.close();
+            }
+        };
+
+        doc.body.appendChild(overlay);
+    };
+
+    SNAudio.prototype.close = function () {
+        var doc = this.getDocument();
+        var modal = doc.getElementById(this.modalId);
+
+        if (modal && modal.parentNode) {
+            modal.parentNode.removeChild(modal);
+        }
+    };
+
+    SNAudio.prototype.addStyles = function (doc) {
+        if (doc.getElementById(this.styleId)) {
+            return;
+        }
+
+        var style = doc.createElement("style");
+        style.id = this.styleId;
+
+        style.textContent =
+            "#" + this.modalId + "{" +
+            "position:fixed;inset:0;z-index:2147483647;" +
+            "display:flex;align-items:center;justify-content:center;" +
+            "padding:20px;background:rgba(15,23,42,.65);" +
+            "font-family:Arial,sans-serif;box-sizing:border-box;" +
+            "}" +
+            "#" + this.modalId + " *{box-sizing:border-box;}" +
+            "#" + this.modalId + " .play-modal{" +
+            "width:100%;max-width:720px;max-height:85vh;overflow:auto;" +
+            "background:#fff;border-radius:12px;" +
+            "box-shadow:0 20px 60px rgba(0,0,0,.3);color:#1f2937;" +
+            "}" +
+            "#" + this.modalId + " .play-header{" +
+            "display:flex;align-items:center;justify-content:space-between;" +
+            "gap:16px;padding:20px 24px;border-bottom:1px solid #e5e7eb;" +
+            "}" +
+            "#" + this.modalId + " .play-title{" +
+            "margin:0;font-size:20px;font-weight:700;" +
+            "}" +
+            "#" + this.modalId + " .play-subtitle{" +
+            "margin:6px 0 0;font-size:13px;color:#6b7280;" +
+            "}" +
+            "#" + this.modalId + " .play-close{" +
+            "border:0;background:transparent;color:#6b7280;" +
+            "font-size:28px;cursor:pointer;line-height:1;padding:0 4px;" +
+            "}" +
+            "#" + this.modalId + " .play-content{padding:20px 24px;}" +
+            "#" + this.modalId + " table{" +
+            "width:100%;border-collapse:collapse;font-size:14px;" +
+            "}" +
+            "#" + this.modalId + " th{" +
+            "background:#f8fafc;color:#64748b;font-weight:600;" +
+            "text-align:left;font-size:12px;text-transform:uppercase;" +
+            "}" +
+            "#" + this.modalId + " th,#" + this.modalId + " td{" +
+            "padding:13px 12px;border-bottom:1px solid #e5e7eb;" +
+            "vertical-align:middle;" +
+            "}" +
+            "#" + this.modalId + " tbody tr:hover{background:#f8fafc;}" +
+            "#" + this.modalId + " .play-command{" +
+            "font-family:monospace;font-size:13px;color:#5e4e9b;" +
+            "font-weight:600;white-space:nowrap;" +
+            "}" +
+            "#" + this.modalId + " .play-button{" +
+            "border:0;border-radius:6px;padding:8px 12px;" +
+            "background:#5e4e9b;color:#fff;font-size:12px;" +
+            "font-weight:600;cursor:pointer;white-space:nowrap;" +
+            "}" +
+            "#" + this.modalId + " .play-button:hover{background:#493a80;}" +
+            "#" + this.modalId + " .play-footer{" +
+            "padding:14px 24px;border-top:1px solid #e5e7eb;" +
+            "display:flex;justify-content:space-between;align-items:center;" +
+            "gap:12px;color:#6b7280;font-size:12px;" +
+            "}" +
+            "@media(max-width:520px){" +
+            "#" + this.modalId + "{padding:10px;}" +
+            "#" + this.modalId + " .play-header," +
+            "#" + this.modalId + " .play-content{padding:16px;}" +
+            "#" + this.modalId + " th,#" + this.modalId + " td{" +
+            "padding:10px 6px;" +
+            "}" +
+            "#" + this.modalId + " .play-command{" +
+            "white-space:normal;overflow-wrap:anywhere;" +
+            "}" +
+            "#" + this.modalId + " .play-footer{padding:12px 16px;}" +
+            "}";
+
+        doc.head.appendChild(style);
+    };
+
+    // Disponibiliza a classe global.
+    global.SNAudio = SNAudio;
+
+})(typeof window !== "undefined" ? window : this);
