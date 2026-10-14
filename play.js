@@ -83,7 +83,7 @@
             "bolinha-golfe": {
                 url: "https://www.myinstants.com/media/sounds/pica-pau-bolinha-de-golfe.mp3",
                 description: "Bolinha de Golfe"
-            },
+            }
         };
     }
 
