@@ -77,13 +77,97 @@
                 description: "Replay"
             },
             "obg-amigo": {
-                url: "https://www.myinstants.com/media/sounds/obrigado-amigo-voce-e-um-amigo.mp3'",
+                url: "https://www.myinstants.com/media/sounds/obrigado-amigo-voce-e-um-amigo.mp3",
                 description: "Obrigado amigo, você é um amigo"
             },
             "bolinha-golfe": {
                 url: "https://www.myinstants.com/media/sounds/pica-pau-bolinha-de-golfe.mp3",
                 description: "Bolinha de Golfe"
-            }
+            },
+            "dileira-sorveteiro": {
+                url: "https://www.myinstants.com/media/sounds/dileira_gxRCXfD.mp3",
+                description: "Dileira Sorveteiro"
+            },
+            "hee-he": {
+                url: "https://www.myinstants.com/media/sounds/michael-jackson-hee-hee.mp3",
+                description: "Hee-ge"
+            },
+            "dilera-coracao": {
+                url: "https://www.myinstants.com/media/sounds/dilera-coracao.mp3",
+                description: "Dileira Sorveteiro"
+            },
+            "dilera-gugu": {
+                url: "https://www.myinstants.com/media/sounds/dilera-aiiiiinn-gugu.mp3",
+                description: "Dileira Gugu"
+            },
+            "meow": {
+                url: "https://www.myinstants.com/media/sounds/m-e-o-w.mp3",
+                description: "Meow"
+            },
+            "birl": {
+                url: "https://www.myinstants.com/media/sounds/birl.mp3",
+                description: "Birl"
+            },
+            "hora-do-show": {
+                url: "https://www.myinstants.com/media/sounds/hora-do-show_3KSrHM4.mp3",
+                description: "Hora do Show"
+            },
+            "hastad1": {
+                url: "https://www.myinstants.com/media/sounds/untitled_1040.mp3",
+                description: "Hastad Cavalo imundo"
+            },
+            "hastad2": {
+                url: "https://www.myinstants.com/media/sounds/hastad-nha.mp3",
+                description: "Hastad Nha"
+            },
+            "eoq": {
+                url: "https://www.myinstants.com/media/sounds/eoq.mp3",
+                description: "Hora do Show"
+            },
+            "lago-aqui": {
+                url: "https://www.myinstants.com/media/sounds/lago-aqui-lago-ai.mp3",
+                description: "Lago aqui lago ai"
+            },
+            "fon": {
+                url: "https://www.myinstants.com/media/sounds/yoda.mp3",
+                description: "FON"
+            },
+            "android": {
+                url: "https://www.myinstants.com/media/sounds/cheiro-de-android-advogado-paloma.mp3",
+                description: "Android"
+            },
+            "mickey1": {
+                url: "https://www.myinstants.com/media/sounds/ai-que-delicia-mickey.mp3",
+                description: "ai que delicia mickey"
+            },
+            "morango": {
+                url: "https://www.myinstants.com/media/sounds/morango-ao-lei-ao-lei-ao-leiteeeeeeee.mp3",
+                description: "morango yodel"
+            },
+            "nani": {
+                url: "https://www.myinstants.com/media/sounds/nani_Pmxf5n3.mp3",
+                description: "nani"
+            },
+            "pabllo1": {
+                url: "https://www.myinstants.com/media/sounds/pabllo-vittar-aiin-q-deliciaann-uarroinn-original.mp3",
+                description: "Pabllo Vittar - aiin q deliciaann uarroinn"
+            },
+            "ze-da-manga": {
+                url: "https://www.myinstants.com/media/sounds/ah-ze-da-manga_dgSl2iS.mp3",
+                description: "Ze da Manga"
+            },
+            "mario-jump": {
+                url: "https://www.myinstants.com/media/sounds/maro-jump-sound-effect_1.mp3",
+                description: "Mario jump"
+            },
+            "mario-death": {
+                url: "https://www.myinstants.com/media/sounds/super-mario-death-sound-sound-effect.mp3",
+                description: "Mario Death"
+            },
+            "mario-bros": {
+                url: "https://www.myinstants.com/media/sounds/super-mario-bros_8nlGIsH.mp3",
+                description: "Mario bros"
+            },
         };
     }
 
