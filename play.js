@@ -47,7 +47,43 @@
             "balada": {
                 url: "https://www.myinstants.com/media/sounds/tiririca-bom-negocio-vamo-pra-balada.mp3",
                 description: "Balada"
-            }
+            },
+            "chines-reclamando": {
+                url: "https://www.myinstants.com/media/sounds/chines-reclamando-do-empregado.mp3",
+                description: "Chines Reclamando"
+            },
+            "bluetooth-connected": {
+                url: "https://www.myinstants.com/media/sounds/bluetooth-connected-succesfully-high-quality.mp3",
+                description: "Bluetooth Conectado"
+            },
+            "cariani1": {
+                url: "https://www.myinstants.com/media/sounds/eu-quero-eu-posso.mp3",
+                description: "Cariani - eu quero eu posso"
+            },
+            "merendar": {
+                url: "https://www.myinstants.com/media/sounds/tiririca-au-gostaria-de-merendar.mp3",
+                description: "Tiririca - Au, gostaria de merendar"
+            },
+            "diddy": {
+                url: "https://www.myinstants.com/media/sounds/foi-o-pi-diddy.mp3",
+                description: "foi o pi diddy"
+            },
+            "cavalo": {
+                url: "https://www.myinstants.com/media/sounds/cavalo-ratinho.mp3",
+                description: "Cavalo Ratinho"
+            },
+            "replay": {
+                url: "https://www.myinstants.com/media/sounds/pica01.mp3",
+                description: "Replay"
+            },
+            "obg-amigo": {
+                url: "https://www.myinstants.com/media/sounds/obrigado-amigo-voce-e-um-amigo.mp3'",
+                description: "Obrigado amigo, você é um amigo"
+            },
+            "bolinha-golfe": {
+                url: "https://www.myinstants.com/media/sounds/pica-pau-bolinha-de-golfe.mp3",
+                description: "Bolinha de Golfe"
+            },
         };
     }
 
